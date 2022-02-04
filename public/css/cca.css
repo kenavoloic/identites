@@ -1,0 +1,596 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 100%;
+}
+body {
+  margin: 0 auto;
+  font-size: 100%;
+  background-color: #f0f0f0;
+  color: #000000;
+}
+sup {
+  font-size: 80%;
+  line-height: 1.2;
+  vertical-align: top;
+}
+main {
+  padding: 5px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: #f0f0f0;
+}
+h1,
+h2 {
+  font-size: 1em;
+  font-family: sans-serif;
+  margin: 1em 0;
+}
+h1 span,
+h2 span {
+  font-size: inherit;
+  color: #ffffff;
+  background-color: #125293;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 6px;
+  border: 2px solid #f0a91b;
+}
+h2 span {
+  background: #185ec0;
+}
+p {
+  font-family: sans-serif;
+  font-size: 1em;
+  text-align: justify;
+  margin: 0.3em 0 0.3em 0;
+}
+p span {
+  color: #547aea;
+}
+article.regions {
+  background: #ffffff;
+  padding: 10px;
+  border: 2px solid #185ec0;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 5px;
+}
+article.regions details {
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+article.regions details summary span {
+  font-family: monospace;
+  letter-spacing: -1px;
+}
+article.regions details summary span.isoRegion {
+  color: #547aea;
+}
+article.regions details summary span.nomRegion {
+  color: #000000;
+}
+article.regions details:hover {
+  cursor: pointer;
+  color: #185ec0;
+  background: #f0a91b;
+}
+article.regions details ul {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  background: #f0f0f0;
+}
+article.regions details ul li {
+  list-style-type: none;
+  text-align: left;
+}
+article.regions details ul li span {
+  font-family: monospace;
+  letter-spacing: -1px;
+}
+article.regions details ul li span.nomDpt {
+  color: #000000;
+}
+article.regions details ul li span.dpt {
+  color: #547aea;
+}
+article.villes {
+  background-color: #8294ef;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #185ec0;
+  display: flex;
+  flex-wrap: wrap;
+}
+article.villes .ville {
+  display: flex;
+  justify-content: center;
+}
+div.lien {
+  font-family: sans-serif;
+  text-transform: none;
+}
+ul#barre,
+ul#barreInerte {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  margin: 2px 0;
+  padding: 5px;
+  list-style: none;
+  background: #ffffff;
+  border-bottom: 3px solid #e42766;
+}
+ul#barre li,
+ul#barreInerte li {
+  list-style-type: none;
+  text-align: center;
+}
+ul#barre li a,
+ul#barreInerte li a {
+  font-family: sans-serif;
+  color: #2766e4;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 2px;
+  transition: all 125ms ease-in-out;
+}
+ul#barre li a:hover,
+ul#barreInerte li a:hover {
+  color: #f0a91b;
+  letter-spacing: 0px;
+}
+ul.chaine {
+  display: grid;
+  background: inherit;
+  font-family: sans-serif;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 5px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  margin: 2px 0;
+  padding: 5px;
+}
+ul.chaine li {
+  background-color: #8294ef;
+  margin: 0;
+  padding: 5px;
+  border: 2px solid #125293;
+  border-radius: 6px;
+  font-family: monospace;
+  letter-spacing: -1px;
+  list-style-type: none;
+  text-align: center;
+}
+ul.chaine li span {
+  display: inline-block;
+  color: #ffffff;
+  padding-right: 5px;
+  font-family: sans-serif;
+}
+ul.chaine li.ppte {
+  overflow: hidden;
+}
+ul.listes {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  border: 3px solid transparent;
+  border-radius: 6px;
+  font-family: monospace;
+}
+ul.listes li {
+  width: 98%;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  border: 3px solid transparent;
+  border-radius: 6px;
+}
+ul.listes li span.lien {
+  padding: 5px;
+  background-color: #8294ef;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+ul.listes li span.lien a {
+  color: #ffffff;
+  text-decoration: none;
+}
+ul.listes li span.lien a:hover {
+  color: #000000;
+  background: #8294ef;
+}
+ul.listes li span.taille {
+  color: #185ec0;
+  margin-left: 2em;
+  padding: 5px;
+  border: 2px solid transparent;
+}
+form#f3,
+form#seed,
+form#inerte {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 100%;
+  background-color: #afbbf5;
+  padding: 5px;
+  column-gap: 10px;
+  row-gap: 5px;
+  font-size: 1em;
+}
+form#f3 div,
+form#seed div,
+form#inerte div {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: space-around;
+  column-gap: 5px;
+}
+form#f3 input,
+form#seed input,
+form#inerte input,
+form#f3 select,
+form#seed select,
+form#inerte select,
+form#f3 label,
+form#seed label,
+form#inerte label,
+form#f3 button,
+form#seed button,
+form#inerte button {
+  color: #185ec0;
+  border: 2px solid #2766e4;
+  border-radius: 6px;
+  text-align: center;
+  padding: 5px 10px;
+}
+form#f3 select,
+form#seed select,
+form#inerte select {
+  color: #ffffff;
+  background-color: #547aea;
+}
+form#f3 select option,
+form#seed select option,
+form#inerte select option {
+  color: #000000;
+  background-color: #ffffff;
+  text-align: center;
+}
+form#f3 label,
+form#seed label,
+form#inerte label {
+  font-size: 1em;
+  font-weight: 700;
+  font-family: sans-serif;
+  color: #ffffff;
+  text-align: center;
+  border-color: transparent;
+  border-radius: 6px;
+}
+form#f3 input[type="submit"],
+form#seed input[type="submit"],
+form#inerte input[type="submit"] {
+  padding: 5px 15px;
+  color: #ffffff;
+  width: 5em;
+  background-color: #66e427;
+  cursor: pointer;
+}
+form#f3 input[type="number"],
+form#seed input[type="number"],
+form#inerte input[type="number"],
+form#f3 input[type="text"],
+form#seed input[type="text"],
+form#inerte input[type="text"] {
+  font-family: monospace;
+  letter-spacing: -1px;
+}
+form#f3 button,
+form#seed button,
+form#inerte button {
+  padding: 5px 15px;
+  border-radius: 6px;
+  color: #ffffff;
+  width: 5em;
+  background-color: #66e427;
+  cursor: pointer;
+}
+form#f3 .inactif,
+form#seed .inactif,
+form#inerte .inactif {
+  background-color: grey;
+  color: #000000;
+  cursor: none;
+}
+form#f3 .actif,
+form#seed .actif,
+form#inerte .actif {
+  color: #ffffff;
+  border: 2px solid #2766e4;
+  background-color: #66e427;
+  cursor: pointer;
+}
+form#seed {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+form#seed label {
+  flex: 0;
+}
+form#seed input[type="submit"] {
+  flex: 0;
+}
+form#seed input[type="text"] {
+  font-family: monospace;
+  color: #e42766;
+  flex: 2;
+}
+form#seed input#actuel {
+  color: #000000;
+}
+form#seed input#nouveau {
+  color: #66e427;
+}
+table {
+  border-collapse: collapse;
+  border: 2px solid #2766e4;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  width: 100%;
+  font-family: sans-serif;
+}
+table td,
+table th {
+  border: 1px solid #000000;
+  padding: 7px 5px;
+  text-align: center;
+}
+table th {
+  color: #ffffff;
+  background-color: #2766e4;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+table td.genre {
+  text-transform: capitalize;
+}
+table td.jourNaissance,
+table td.dob,
+table td.villeNaissanceNom,
+table td.villeNaissanceDepartementNumero {
+  color: #ffffff;
+  background-color: #8294ef;
+}
+table td.courriel,
+table td.villeResidenceCodePostal,
+table td.villeResidenceNom,
+table td.adresse {
+  color: #000000;
+  background-color: #98a7f2;
+}
+table tbody > tr {
+  transition: all 125ms ease-in-out;
+}
+table tbody > tr:hover {
+  color: #000000;
+  background-color: #afbbf5;
+}
+table tbody > tr:hover td.jourNaissance,
+table tbody > tr:hover td.dob,
+table tbody > tr:hover td.villeNaissanceNom,
+table tbody > tr:hover td.villeNaissanceDepartementNumero {
+  color: #000000;
+  background-color: #afbbf5;
+}
+table tbody > tr:hover td.courriel,
+table tbody > tr:hover td.villeResidenceCodePostal,
+table tbody > tr:hover td.villeResidenceNom,
+table tbody > tr:hover td.adresse {
+  color: #000000;
+  background-color: #ffffff;
+}
+section#principales div.liste,
+section#marseille div.liste,
+section#lyon div.liste,
+section#paris div.liste {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 5px;
+}
+section#principales div.liste div span.nomCommune,
+section#marseille div.liste div span.nomCommune,
+section#lyon div.liste div span.nomCommune,
+section#paris div.liste div span.nomCommune,
+section#principales div.liste div span.numeroCommune,
+section#marseille div.liste div span.numeroCommune,
+section#lyon div.liste div span.numeroCommune,
+section#paris div.liste div span.numeroCommune {
+  font-family: monospace;
+  letter-spacing: -1px;
+}
+section#principales div.liste div span.nomCommune,
+section#marseille div.liste div span.nomCommune,
+section#lyon div.liste div span.nomCommune,
+section#paris div.liste div span.nomCommune {
+  color: #000000;
+  padding-right: 5px;
+}
+section#principales div.liste div span.numeroCommune,
+section#marseille div.liste div span.numeroCommune,
+section#lyon div.liste div span.numeroCommune,
+section#paris div.liste div span.numeroCommune {
+  color: #547aea;
+}
+article#communesInsee {
+  padding: 10px 0;
+}
+article#communesInsee form {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  background-color: #8294ef;
+  background-color: #ffffff;
+  border: 2px solid #185ec0;
+  display: flex;
+  justify-content: space-between;
+}
+article#communesInsee form input {
+  border-radius: 4px;
+  padding: 0 5px;
+  flex: 1 1 auto;
+  font-family: monospace;
+  letter-spacing: -1px;
+  font-weight: 400;
+}
+article#communesInsee form label {
+  font-family: sans-serif;
+  color: #000000;
+  margin-right: 10px;
+}
+article#communesInsee section#panneau {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 5px;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 10px 0;
+}
+article#communesInsee section#panneau div.nomNumero {
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: space-between;
+}
+article#communesInsee section#panneau div.nomNumero span.nomCommune,
+article#communesInsee section#panneau div.nomNumero span.numeroCommune {
+  font-family: monospace;
+  letter-spacing: -1px;
+}
+article#communesInsee section#panneau div.nomNumero span.nomCommune {
+  color: #000000;
+  padding-right: 5px;
+}
+article#communesInsee section#panneau div.nomNumero span.numeroCommune {
+  color: #547aea;
+}
+details.json {
+  margin: 10px 0;
+  cursor: pointer;
+}
+details.json summary {
+  font-size: 1em;
+  font-family: sans-serif;
+  color: #f0a91b;
+  margin: 10px 0;
+}
+details.json summary span {
+  color: #ffffff;
+  background: #8294ef;
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+details.json pre {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 5px;
+  width: 95%;
+}
+details.json code {
+  font-family: monospace;
+  color: #000000;
+}
+details.json code span {
+  color: #547aea;
+}
+details.json code span.champs {
+  color: #f0a91b;
+}
+details.json code span.crochet {
+  color: #e42766;
+}
+details.json code span.tableau {
+  color: #66e427;
+}
+div#_demo1,
+div#_demo2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px;
+  column-gap: 10px;
+  row-gap: 5px;
+  background-color: #afbbf5;
+  border-radius: 6px;
+}
+div#_demo1 input,
+div#_demo2 input,
+div#_demo1 select,
+div#_demo2 select {
+  color: #185ec0;
+  border: 2px solid #2766e4;
+  border-radius: 6px;
+  text-align: center;
+  padding: 5px 10px;
+}
+div#_demo1 input[type="text"],
+div#_demo2 input[type="text"] {
+  font-family: monospace;
+  letter-spacing: -1px;
+}
+div#_demo1 select,
+div#_demo2 select {
+  color: #ffffff;
+  background-color: #547aea;
+}
+div#_demo1 select option,
+div#_demo2 select option {
+  color: #000000;
+  background-color: #ffffff;
+  text-align: center;
+}
+div#_demo1 #demo1,
+div#_demo2 #demo1,
+div#_demo1 #demo2,
+div#_demo2 #demo2 {
+  flex: 1;
+}
+div#_demo1 #d1t1,
+div#_demo2 #d1t1,
+div#_demo1 #d1t2,
+div#_demo2 #d1t2,
+div#_demo1 #d2t1,
+div#_demo2 #d2t1,
+div#_demo1 #d2t2,
+div#_demo2 #d2t2 {
+  flex: 2;
+}
+article.separateur {
+  margin: 1em 0;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 6px;
+}
+form#inerte,
+ul#resultatInerte,
+ul#barreInerte,
+#_demo1,
+#_demo2 {
+  width: 80%;
+  margin: 1em auto;
+  border: 2px solid #125293;
+  border-radius: 6px;
+}

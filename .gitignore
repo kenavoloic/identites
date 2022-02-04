@@ -1,0 +1,7 @@
+node_modules/
+ztank/
+public/listes/*.*
+*.0
+*.1
+*.2
+*.[0-9]
