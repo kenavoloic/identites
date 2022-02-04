@@ -1,0 +1,75 @@
+	<%- include('partiels/hautDePage.ejs') %>
+	<%- include('partiels/barre.ejs') %>
+	
+	<main>
+
+	    <h1><span>Identités</span></h1>
+	    <p>API de génération aléatoire de liste d’identités à l'instar de <em>fakers.js</em> ou de <em>randomuser</em>. La taille maximale d’une liste est de <%= maximum %> items.</p>
+
+	    <p>Pour chaque individu, sont générés nom, prénom, genre, courriel, adresse, date de naissance, lieu de naissance et  numéro de sécurité sociale.</p>
+
+	    <p>Une liste se définit en spécifiant le genre des individus, la date de naissance de ceux-ci en spécifiant une date plancher et une date plafond, le lieu de naissance et le lieu du  domicile.</p>
+
+	    <p>Il est possible de produire  des listes en fonction de zones géographiques spécifiques : une ville, un département, une région ou le pays en entier.</p>
+
+
+	    <h2><span>Mode d’emploi</span></h2>
+
+	    <article class="separateur">
+		<%- include('partiels/barre_inerte.ejs') %>
+
+		<p>C’est dans l’onglet <span>Requête</span> que s’effectue la recherche. Les fichiers générés sont téléchargeables depuis l’onglet <span>Fichiers</span>. La seed peut être modifiée dans l’onglet <span>Seed</span>. L’onglet <span>Régions</span> propose la liste des régions et de leurs départements. Sont également proposés les codes INSEE des principales communes de France.</p>
+	    </article>
+
+	    <article class="separateur">
+		<%- include('partiels/formulaire_inerte.ejs') %>
+
+		<p> C’est dans l’onglet <span>Requete</span> que s’effectue la génération de la liste. <span>Nombre</span> indique le nombre d’items de la liste. <span>Genre</span>, permet de choisir entre <span>homme</span> ou <span>femme</span>. <span>Indifférent</span> produira une liste dans laquelle homme et femme sont représentés dans des proportions différentes.</p>
+
+		<p><span>Plancher</span> et <span>Plafond</span> permettent de définir l’intervalle dans lequel seront incluses toutes les dates de naissance générées. <span>Plancher</span> et <span>Plafond</span> doivent être formatés ainsi <span>jour/mois/année</span>.</p>
+		
+	    </article>
+
+	    <article class="separateur">
+
+		<%- include('partiels/demo2.ejs') %>
+		
+		<p>En sélectionnant <span>France</span>, le lieu de naissance ou le domicile sera une commune choisie au hasard. Il n’est pas nécessaire d’entrer une valeur. C’est la valeur par défaut.</p>
+		<p>Si au contraire vous décidez de choisir <span>Région</span> ou <span>Département</span>, vous réduisez le choix des communes à celles d’une région ou d’un département. À l’inverse, en sélectionnant <span>Ville</span>, le choix est désormais restreint à une seule commune.</p>
+
+		<p>Voici les valeurs par défaut.</p>
+		<p><span>Région</span>, il s’agit de <span>fr-naq</span>, la région Nouvelle-Aquitaine.</p>
+		<p><span>Département</span>, le département n<sup>o</sup> <span>33</span>, soit le département de la Gironde.</p>
+		<p><span>Ville</span>, le code INSEE de la ville de Bordeaux, <span>33063</span>.</p>
+
+	    </article>
+
+	    <article class="separateur">
+
+		<p>Il est malgré tout possible de combiner des régions, des départements et des villes. Il suffit pour cela de séparer les valeurs par deux points.</p> 
+
+		<%- include('partiels/demo1.ejs') %>
+
+		<p>Ainsi <span>fr-naq:fr-occ:fr-cor</span> crée un sous-ensemble limité aux communes de ces trois régions. <span>13:75:79</span> limitera le choix aux communes de  ces trois départements. <span>33063:31555:06088:59350</span>, codes INSEE des communes de  Bordeaux, Toulouse, Nice, Lille, limitera le choix à ces quatre communes.</p>
+
+	    </article>
+
+
+	    <article class="separateur">
+		
+		<p>Le tableau de résultat récapitule dans son entête la requête initiale. Quelque soit le nombre d’éléments de la liste, le tableau de résultats n’affichera que <%= apercu %> éléments. Cela permet de vérifier l’adéquation du résultat avec la requête.</p>
+
+		<%- include('partiels/resultat_inerte.ejs') %>
+	    </article>
+
+
+	    <h2><span>Fichier JSON</span></h2>
+
+	    <p>Le fichier JSON retourné contient un objet, <span>requete</span>, et un tableau, <span>data</span>.</p>
+
+	    <%- include('partiels/json.ejs')%>
+
+	</main>
+	<script src="js/selectionneur.js" charset="utf-8"></script>
+
+	<%- include('partiels/basDePage.ejs') %>

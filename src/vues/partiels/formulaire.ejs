@@ -1,0 +1,52 @@
+<form id="f3"  name="formulaire"  action="/resultats" method="get">
+
+    <div id="_genre">
+	<label id="genre" for="genre">Genre</label>
+	<select id="genre" name="genre">
+	    <option value="f">Femme</option>
+	    <option value="h">Homme</option>
+	    <option selected value="x">Indifférent</option>
+	</select>
+    </div>
+
+
+    <div id="_nombre">
+	<label id="quantite" for="quantite">Nombre</label>
+	<input name="quantite" type="number" min="1" max="<%= maximum %>" value="<%= defaut %>"/>
+    </div>
+    
+    <div id="_plancher">
+	<label id="plancher" for="plancher">Plancher</label>
+	<input name="plancher" id="d1" type="text" placeholder="<%= plancher %>" value="<%= plancher %>"/>
+    </div>
+    
+    <div id="_plafond">
+	<label id="plafond" for="plafond">Plafond</label>
+	<input name="plafond" id="d2" type="text" placeholder="<%= plafond %>" value="<%= plafond %>"/>
+    </div>
+
+    <div id="_zone1">
+	<label id="zone1" for="determinant1">Naissance</label>    
+	<select id="determinant1"  name="determinant1">
+	    <option selected value="france">France</option>
+	    <option value="region">Région</option>
+	    <option value="departement">Département</option>
+	    <option value="ville">Ville</option>
+	</select>
+	<input type="text" id="valeur1" name="valeur1" placeholder="" value=""/>
+    </div>
+    
+    <div id="_zone2">
+	<label id="zone2" for="determinant2">Domicile</label>
+	<select id="determinant2" name="determinant2">
+	    <option selected value="france">France</option>
+	    <option value="region">Région</option>
+	    <option value="departement">Département</option>
+	    <option value="ville">Ville</option>
+	</select>
+	<input type="text" id="valeur2" name="valeur2" placeholder="" value=""/>
+    </div>
+    
+    <input id="envoi" type="submit" value="Envoi" />
+
+</form>

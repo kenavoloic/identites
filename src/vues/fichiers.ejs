@@ -1,0 +1,13 @@
+<%- include('partiels/hautDePage.ejs') %>
+<%- include('partiels/barre.ejs') %>
+<main>
+    <article class="listeFichiers">
+	<% liste.forEach((x,index) => {%>
+	    <p><a href="fichier/<%= x.nom %>"><%= x.nom %></a> <span><%= x.taille %></span></p>
+	<% }) %>
+    </article>
+</main>
+<%- include('partiels/basDePage.ejs') %>
+
+
+

@@ -1,0 +1,26 @@
+<%
+const parametres = {
+    genre: "x",
+    quantite: "2",
+    plancher: "1/1/1981",
+    plafond: "10/10/2001",
+    determinant1: "france",
+    valeur1: "",
+    determinant2: "france",
+    valeur2: "",
+    seed: "Louison Bobet",
+    horodateur: "2022_01_19_22_58_26"
+};
+%>
+
+	    <ul class="chaine" id="resultatInerte">
+		<li><span class="ppte">Seed</span><%= parametres.seed %></li>
+    		<li><span class="ppte">Genre</span><%= parametres.genre %></li>
+		<li><span class="ppte">Quantité</span><%= parametres.quantite %></li>
+		<li><span class="ppte">Plancher</span><%= parametres.plancher %></li>
+		<li><span class="ppte">Plafond</span><%= parametres.plafond %></li>
+		<li><span class="ppte">Naissance</span><%= parametres.determinant1 %></li>
+		<li><span class="ppte">Valeur</span><%= parametres.valeur1 %></li>
+		<li><span class="ppte">Domicile</span><%= parametres.determinant2 %></li>
+		<li><span class="ppte">Valeur</span><%= parametres.valeur2 %></li>
+	    </ul>

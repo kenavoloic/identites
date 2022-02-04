@@ -1,0 +1,13 @@
+<%
+const fdate = new Intl.DateTimeFormat('fr-FR', {dateStyle:'short'});
+%>
+	<%- include('partiels/hautDePage.ejs') %>
+	<%- include('partiels/barre.ejs') %>
+	<%- include('partiels/formulaire.ejs', {maximum: maximum, defaut:defaut}) %>
+
+	<section id="lignes">
+	</section>
+
+	<script src="js/pageVierge.js" charset="utf-8"></script>
+	<%- include('partiels/basDePage.ejs') %>
+

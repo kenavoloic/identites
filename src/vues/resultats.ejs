@@ -1,0 +1,71 @@
+<%
+const fdate = new Intl.DateTimeFormat('fr-FR', {dateStyle:'short'});
+%>
+	<%- include('partiels/hautDePage.ejs') %>
+	<%- include('partiels/barre.ejs') %>
+	<%- include('partiels/formulaire.ejs', {maximum: maximum, defaut:defaut}) %>
+	
+
+	<ul class="chaine">
+	    <li><span class="ppte">Seed</span><%= parametres.seed %></li>
+    	    <li><span class="ppte">Genre</span><%= parametres.genre %></li>
+	    <li><span class="ppte">Quantité</span><%= parametres.quantite %></li>
+	    <li><span class="ppte">Plancher</span><%= parametres.plancher %></li>
+	    <li><span class="ppte">Plafond</span><%= parametres.plafond %></li>
+	    
+	    <li><span class="ppte">Naissance</span><%= parametres.determinant1 %></li>	    
+	    <% if(parametres.valeur1) { %>
+	    	    <li><span class="ppte">Valeur</span><%= parametres.valeur1 %></li>
+	    <% } else { %>
+  	            <li><span class="ppte">Valeur</span>Null</li>
+	    <% } %>
+	    
+	    <li><span class="ppte">Domicile</span><%= parametres.determinant2 %></li>
+	    <% if(parametres.valeur2) { %>
+	    	    <li><span class="ppte">Valeur</span><%= parametres.valeur2 %></li>
+	    <% } else { %>
+  	            <li><span class="ppte">Valeur</span>Null</li>
+	    <% } %>
+	</ul>
+
+
+	    
+	<table id="tableau">
+	    <thead id="colonnes">
+		<tr>
+		    <th data-booleen="true" id="rang">Rang</th>
+		    <th data-booleen="true" id="genre">Genre</th>
+		    <th data-booleen="true" id="nom">Nom</th>
+		    <th data-booleen="true" id="prenom">Prénom</th>
+		    <th data-booleen="true" id="courriel">Courriel</th>
+		    <th data-booleen="true" id="villeResidenceCodePostal">Code postal</th>
+		    <th data-booleen="true" id="villeResidenceNom">Ville</th>
+		    <th data-booleen="true" id="adresse">Adresse</th>
+		    <th data-booleen="true" id="jourNaissance">Naissance</th>
+		    <th data-booleen="true" id="villeNaissanceNom">Ville</th>
+		    <th data-booleen="true" id="villeNaissanceDepartementNumero">Dpt</th>
+		</tr>
+	    </thead>
+	    <tbody id="lignes">
+		<% data.forEach((x,index) => {%>
+		    <tr>
+			<td class="rang"><%= index+1 %></td>
+			<td class="genre"><%= x.genre%></td>
+			<td class="nom"><%= x.nom %></td>
+			<td class="prenom"><%= x.prenom %></td>
+			<td class="courriel"><%= x.courriel %></td>
+			<td class="villeResidenceCodePostal"><%= x.villeResidenceCodePostal %></td>
+			<td class="villeResidenceNom"><%= x.villeResidenceNom %></td>
+			<td class="adresse"><%= x.adresse %></td>
+			<td class="jourNaissance"><%= x.jourNaissance %></td>
+			<td class="villeNaissanceNom"><%= x.villeNaissanceNom %></td>
+			<td class="villeNaissanceDepartementNumero"><%= x.villeNaissanceDepartementNumero %></td>
+		    </tr>
+		<% }) %>
+	    </tbody>
+	</table>
+
+	<script src="js/algoTri.js" charset="utf-8"></script>
+	<script src="js/actions.js" charset="utf-8"></script>
+	<%- include('partiels/basDePage.ejs') %>
+

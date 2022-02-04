@@ -1,0 +1,17 @@
+<%- include('partiels/hautDePage.ejs') %>
+<%- include('partiels/barre.ejs') %>
+<main>
+<% if(liste.length == null | liste.length === 0) {%>
+<p>Aucun fichier.</p>
+<%} else {%>
+    <ul class="listes">
+	<% liste.forEach((x,index) => {%>
+	    <li>
+	    <span class="lien"><a href="fichier/<%= x.nom %>"><%= x.nom %></a></span>
+	    <span class="taille"><%= x.taille %></span>
+	    </li>
+	<% }) %>
+    </ul>
+    <% } %>
+</main>
+<%- include('partiels/basDePage.ejs') %>

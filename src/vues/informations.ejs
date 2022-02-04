@@ -1,0 +1,24 @@
+	<%- include('partiels/hautDePage.ejs') %>
+	<%- include('partiels/barre.ejs') %>
+	
+	<main id="decoupageAdministratif">
+	    <h1><span>Les régions françaises et leurs départements</span></h1>
+	    <p>Code ISO et départements constitutifs</p>
+	    <%- include('partiels/regions.ejs') %>
+
+	    <article>
+		<h1><span>Codes insee</span></h1>
+		<p>Liste non exhaustive de communes ou d’arrondissements avec leur code insee.</p>
+		<%- include('partiels/villesPrincipales.ejs') %>
+		<%- include('partiels/paris.ejs') %>
+		<%- include('partiels/lyon.ejs') %>
+		<%- include('partiels/marseille.ejs') %>
+	    </article>
+
+	    <article id="communesInsee">
+		<%- include('partiels/insee.ejs') %>
+	    </article>
+	</main>
+	<script src="js/ajax.js" charset="utf-8"></script>
+	<%- include('partiels/basDePage.ejs') %>
+

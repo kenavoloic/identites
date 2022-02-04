@@ -1,0 +1,19 @@
+{
+    "name": "identites",
+    "version": "1.0.0",
+    "description": "Génération de listes d'individus à l'instar de randomUser. Pour chaque individu, est mentionnée nom, prénom, genre, adresse actuelle et lieu de naissance.",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node src/index.js"
+    },
+    "dependencies": {
+	"ejs": "^3.1.6",
+	"express": "^4.17.2",
+	"express-favicon": "^2.0.1",
+	"serve-index": "^1.9.1"
+    },
+    "author": "Kenavo Loïc <kenavoloic@gmail.com> (https://github.com/kenavoloic)",
+    "license": "MIT"
+}
