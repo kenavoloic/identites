@@ -17,8 +17,6 @@ application.use('/listes', express.static(path.resolve(__dirname,'public', 'list
 application.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 
-
-
 application.set('view engine', 'ejs');
 application.set('views', path.join(__dirname, 'vues'));
 

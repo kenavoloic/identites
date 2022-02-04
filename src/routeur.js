@@ -46,7 +46,6 @@ const tailleFichier = taille => {
     const tailles = ['octets','Ko','Mo','Go','To'];
     if(taille == 0) return '0 octet';
     let calcul = parseInt(Math.floor(Math.log(taille) / Math.log(1024)));
-    //let valeur = Math.round(taille/Math.pow(1024, calcul), 2);
     //let chaine = String(valeur).padStart(4, ' ');
     return `${Math.round(taille/Math.pow(1024, calcul), 2)} ${tailles[calcul]}`;
     //return `${chaine} ${tailles[calcul]}`;
@@ -140,17 +139,16 @@ routeur.get('/fichiers', (requete, reponse) => {
 
 
 routeur.get('/regions', (requete, reponse) => {
-    reponse.render('informations', {titre:'Régions, départements et villes'});
+    //reponse.render('informations', {titre:'Régions, départements et villes'});
+    reponse.render('informations', {titre:'Régions'});
 });
 
 
 routeur.get('/ajax', (requete, reponse) => {
     let liste = modele.rechercheInsee(requete.query.lettre).sort((a,b) => a.nom.localeCompare(b.nom) || a.insee.localeCompare(b.insee));
-
     if(!liste){
 	return "";
     }
-
     reponse.json(liste);
 });
 
