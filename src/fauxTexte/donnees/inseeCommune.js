@@ -3,4 +3,3 @@ const inseeCommune = new Map(_liste);
 const inverse = _liste.reduce((retour, x) => [...retour, [x[1].toLowerCase(), x[0]]], []);
 const communeInsee = new Map(inverse);
 export {inseeCommune, communeInsee};
- 
