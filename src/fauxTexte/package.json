@@ -1,7 +1,7 @@
 {
   "name": "FauxTexte",
   "version": "1.0.0",
-  "description": "Moteur de production de données à l'instar de fakers.js",
+  "description": "Générateur de données",
   "main": "index.js",
   "type": "module",
   "private":true,
