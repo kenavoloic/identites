@@ -1,12 +1,12 @@
 {
-  "name": "FauxTexte",
-  "version": "1.0.0",
-  "description": "Générateur de données",
+  "name": "fauxTexte",
+  "version": "0.1.0",
+  "description": "Moteur de génération de données",
   "main": "index.js",
   "type": "module",
   "private":true,
   "keywords": [],
   "author": "Kenavo Loïc <kenavoloic@gmail.com> (https://github.com/kenavoloic)",
-  "homepage":"https://github.com/kenavoloic/fauxtexte#readme",
+  "homepage":"https://github.com/kenavoloic/FauxTexte#readme",
   "license": "MIT"
 }

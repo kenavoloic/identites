@@ -105,5 +105,6 @@ const liste = [
     ["976", {depCode:"976",depNom:"Mayotte",regionCode:6,regionNom:"Mayotte",regionIso:"fr-yt", regionAlphabetique:"13"}],
 ];
 
-const listeDR = new Map(liste);
-export default listeDR;
+//const listeDR = new Map(liste);
+//export default listeDR;
+export default liste;

@@ -2,6 +2,7 @@ import arboretum from './arboretum.js';
 import olympiens from './olympiens.js';
 import personnalites from './personnalites.js';
 import nobel from './nobel.js';
+import tdf from './tdf.js';
 import fields from './fields.js';
 
 const types = ["rue","place","cours","quai","boulevard","avenue","allée","voie","passage", "route", "impasse", "chemin", "square"];
@@ -473,5 +474,5 @@ const estuaires = [
 ];
 
 //const odonymiques = [...bdx, ...fleuvesMetro, ...guyane, ...reunion, ...guadeloupe, ...estuaires];
-const odonymiques = [...bdx, ...fleuvesMetro, ...guyane, ...arboretum, ...olympiens, ...personnalites, ...nobel, ...fields];
+const odonymiques = [...bdx, ...fleuvesMetro, ...guyane, ...arboretum, ...olympiens, ...personnalites, ...nobel, ...fields, ...tdf];
 export {types, odonymiques};

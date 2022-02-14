@@ -1,7 +1,7 @@
 {
     "name": "identites",
     "version": "1.0.0",
-    "description": "Génération de listes d'individus à l'instar de randomUser. Pour chaque individu, est mentionnée nom, prénom, genre, adresse actuelle et lieu de naissance.",
+    "description": "Génération de listes d'individus à l'instar de randomUser. Pour chaque individu, sont indiqués nom, prénom, genre, numéro de sécurité sociale, adresse actuelle et lieu de naissance.",
     "main": "index.js",
     "type": "module",
     "scripts": {

@@ -1,130 +1,108 @@
 import {inseeCommune, communeInsee} from '../donnees/inseeCommune.js';
 import inseePostal from '../donnees/inseePostal.js';
 import prepositions from '../donnees/prepositions.js';
-//import listeDR from '../donnees/listeDR.js';
-import listeDR from '../donnees/departementsRegions.js';
+//import listeDR from '../donnees/departementsRegions.js';
+import listeDR from '../donnees/listeDR.js';
+
+// Constantes
 
 const listeInsee = [...inseeCommune.keys()];
 const listeCommunes = inseeCommune.values();
 const nombreVilles = inseeCommune.size;
 
-//["33", {depCode:"33",depNom:"Gironde",regionCode:75,regionNom:"Nouvelle-Aquitaine",regionIso:"fr-naq", regionAlphabetique:"15"}],
-const defaut = {ville:'33063', depCode:'33', depNom:'gironde', regionCode:75, regionIso:'fr-naq', regionNom:'Nouvelle Aquitaine', regionAlphabetique:"15"};
-
-const bdx = "33063";
-const gironde = "33";
-const nouvelleAquitaine = 'fr-naq';
-
 const numeroMaximumMetropole = "96";
 const ultramarins = ['971','972','973','974','976'];
 const corsica = ['2a','2b'];
+const defaut = {ville:'33063', depCode:'33', depNom:'gironde', regionCode:75, regionIso:'fr-naq', regionNom:'Nouvelle Aquitaine', regionAlphabetique:"15"};
 
-const regions = [...Array.from(listeDR.values()).reduce((retour, {regionIso}) => retour.add(regionIso), new Set())];
-const listeRegions = Array.from(listeDR.values()).reduce((retour, {depCode, regionIso}) => {
-    (retour[regionIso] || (retour[regionIso] = [])).push(depCode);
-    return retour;
-}, {});
+const listeDepartements = listeDR.map(x => [String(x[1].depCode).padStart(2,'0'), x[1].depNom, x[1].regionIso]);
+const listeDepartementNom = listeDR.map(x => [String(x[1].depCode).toUpperCase().padStart(2,'0'), x[1].depNom]);
+const listeRegionsDepartements = listeDepartements.reduce((retour, x) => retour.has(x[2]) ? retour.set(x[2], [...retour.get(x[2]), x[0]]) : retour.set(x[2], [x[0]]), new Map());
+const listeRegionIsoRegionNom = new Map([...new Set(listeDR.map(x => `${x[1].regionIso},${x[1].regionNom}`))].map(x => x.split(',')));
+const listeDepartementsCodeNomRegion = new Map(listeDR.map(x => [String(x[1].depCode).padStart(2,'0'), {depCode:String(x[1].depCode).padStart(2,'0'),depNom:x[1].depNom, regionIso:x[1].regionIso}]));
 
-const _tableDepartementRegion = new Map([...listeDR.values()].reduce((retour, {depCode, regionIso}) => [...retour, [depCode, regionIso]], []));
+const departementNom = envoi => {
+    let dpt = String(envoi).toUpperCase();
+    return listeDepartementNom.has(dpt) ? listeDepartementNom.get(dpt).nom : defaut.depNom;
+};
 
-
-const tableDepartementRegion = envoi => _tableDepartementRegion.has(envoi) ? _tableDepartementRegion.get(envoi) : _tableDepartementRegion.get(defaut.depCode);
-
-const _departementNom = new Map([...listeDR.values()].reduce((retour, {depCode, depNom}) => [...retour, [depCode, depNom]], []));
-
-const departementNom = envoi => _departementNom.has(String(envoi)) ? _departementNom.get(String(envoi)) : defaut.depNom;
-
-
-const departements = Array.from(listeDR.values()).reduce((retour, {depCode}) => [...retour, depCode], []);
+//Prédicats
+const insee_p = envoi => {
+    envoi = String(envoi).toUpperCase();
+    return inseeCommune.has(envoi) ? envoi : defaut.ville;
+};
 
 const departement_p = envoi => {
-    let x = (envoi === null || envoi === undefined) ? defaut.depCode : String(envoi).toUpperCase().padStart(2,'0');
-    return departements.includes(x) ? x : defaut.depCode;
+    envoi = String(envoi).toUpperCase();
+    return listeDepartementsCodeNomRegion.has(envoi) ? envoi : defaut.depCode;
 };
 
-const insee_p = _insee => {
-    _insee = String(_insee).toUpperCase();
-    return inseeCommune.has(_insee) ? _insee : defaut.ville;
+const region_p = envoi => {
+    envoi = String(envoi).toLowerCase();
+    return listeRegionIsoRegionNom.has(envoi) ? envoi : defaut.regionIso;    
 };
 
-const region_p = envoi => regions.includes(envoi) ? listeRegions[envoi] : listeRegions[nouvelleAquitaine];
-
-const _communesDepartementales = departement => {
-    departement = String(departement).toUpperCase();
-    return listeInsee.filter(x => x.startsWith(departement_p(departement)));    
-};
-
-const cdSingleton = departement => {
-    departement = String(departement).toUpperCase();
-    return listeInsee.filter(x => x.startsWith(departement_p(departement)));
-};
-
-const cdTableau = liste => liste.map(x => cdSingleton(x)).reduce((retour, x) => [...retour, ...x], []);
-const communesDepartementales = envoi => Array.isArray(envoi) ? cdTableau(envoi) : cdSingleton(envoi);
-
-const crSingleton = iso => region_p(iso).map(x => communesDepartementales(x)).reduce((retour, x) => [...retour, ...x], []);
-const crTableau = liste => liste.map(x => crSingleton(x)).reduce((retour, x) => [...retour, ...x], []);
-const communesRegionales = envoi => Array.isArray(envoi) ? crTableau(envoi) : crSingleton(envoi);
-
-const cmnSingleton = x => insee_p(x);
-const cmnTableau = liste => liste.map(x => insee_p(x));
-const communes = envoi => Array.isArray(envoi) ? cmnTableau(envoi) : cmnSingleton(envoi);
-
-
-const choixZone = ft => ({determinant, valeur}) => {
-    let retour = null;
-    switch(determinant){
-    case 'france':
-	retour = () => ft.nomVille();
-	break;
-    default:
-	retour = () => ft.nomVille();
-	break;
-    case 'ville':
-	retour = ft.generateurListe([...new Set(communes(valeur))]);
-	break;
-    case 'departement':
-	retour = ft.generateurListe([...new Set(communesDepartementales(valeur))]);
-	break;
-    case 'region':
-	retour = ft.generateurListe([...new Set(communesRegionales(valeur))]);
-	break;
-    case '999':	
-	retour = () => ft.nomVille();
-	break;
-    };
-    return retour;
-};
-
-const ciudad = (_codeInsee, codeInseePays = '00000') => {
-    let chaine = String(_codeInsee);
-    let codeInsee = inseeCommune.has(chaine) ? chaine : defaut.ville;
-    let nom = inseeCommune.get(codeInsee);
-    let postal = inseePostal.get(codeInsee);
-    let matricule = codeInsee.startsWith('97') ? codeInsee.substr(0,3) : codeInsee.substr(0,2);
-    let departement = departement_p(matricule);
-}
-
+//Objet ville
 const ville = (codeInsee, codeInseePays = '00000') => {
     codeInsee = String(codeInsee);
     codeInsee = inseeCommune.has(codeInsee) ? codeInsee : defaut.ville;
     let nom = inseeCommune.get(codeInsee);
     let postal = inseePostal.get(codeInsee);
-    let matricule = codeInsee.startsWith('97') ? codeInsee.substr(0,3) : codeInsee.substr(0,2);
-    let departement = departement_p(matricule);
+    let numeroDepartement = codeInsee.startsWith('97') ? codeInsee.substr(0,3) : codeInsee.substr(0,2);
+    let departement = departement_p(numeroDepartement);
     let codeCommune = codeInsee.slice(2,5).padStart(3, '0');
     let preposition = prepositions.has(codeInsee) ? prepositions.get(codeInsee).a : null;
-    //let dr = listeDR.get(departement);
-    let dr = listeDR.has(departement) ? listeDR.get(departement) : listeDR.get(defaut.depCode);
-    //console.log('territoires ',dr.depCode, codeCommune);
-    //return {nom:nom, codeInsee:codeInsee, codeCommune:codeCommune, codePostal:postal, numeroDepartement:dr.depCode, nomDepartement:dr.depNom, nomRegion:dr.regionNom, isoRegion:dr.regionIso, a:preposition, pays:codeInseePays};
-    return {nom:nom, codeInsee:codeInsee, codeCommune:codeCommune, codePostal:postal, numeroDepartement:matricule, nomDepartement:dr.depNom, nomRegion:dr.regionNom, isoRegion:dr.regionIso, a:preposition, pays:codeInseePays};
+    let dr = listeDepartementsCodeNomRegion.has(departement) ? listeDepartementsCodeNomRegion.get(departement) : listeDepartementsCodeNomRegion.get(defaut.depCode);
+    let nomDepartement = dr.depNom;
+    let isoRegion = dr.regionIso;
+    let nomRegion = listeRegionIsoRegionNom.get(isoRegion);
+    let departementsRegionaux = listeRegionsDepartements.get(isoRegion);
+    return {nom:nom, codeInsee:codeInsee, codePostal:postal, numeroDepartement:numeroDepartement, nomDepartement:nomDepartement, isoRegion:isoRegion, nomRegion:nomRegion , departements:departementsRegionaux, a:preposition};
 };
+
+//Fonctions INSEE : retournes des listes de matricules INSEE de communes.
+const communes = envoi => {
+    let liste = Array.isArray(envoi) ? envoi : [envoi];
+    liste = liste.map(x => String(x).toLowerCase());
+    //Conversion en Set pour éviter tout doublon.
+    return [...new Set(liste.map(x => insee_p(x)))];
+};
+
+const communesDepartementales = envoi => {
+    let liste = Array.isArray(envoi) ? envoi : [envoi];
+    //console.table('cd ', liste);
+    //Conversion en Set pour éviter tout doublon en cas de présences simultanées de 2A et 2a ou 2B et 2b.
+    liste = [...new Set(liste.map(x => String(x).toUpperCase()))];
+    return liste.map(x => listeInsee.filter(y => y.startsWith(x))).reduce((retour, x) => [...retour, ...x], []);
+};
+
+const communesRegionales = envoi => {
+    let liste = Array.isArray(envoi) ? envoi : [envoi];
+    liste = liste.map(x => String(x).toLowerCase()).map(region_p);
+    let departements = liste.map(x => listeRegionsDepartements.get(x)).reduce((retour, x) => [...retour, ...x], []);
+    //Conversion en Set pour éviter tout doublon.
+    departements = [...new Set(departements)];
+    return communesDepartementales(departements);
+};
+
+
 
 export {
     insee_p, departement_p, region_p,
-    nombreVilles, ville,
+    ville,
+    communes, communesRegionales, communesDepartementales,
+    nombreVilles, 
     inseeCommune, inseePostal, communeInsee,
+    
     departementNom,
-    communes, communesRegionales, communesDepartementales
+    listeDepartements,
+    listeRegionIsoRegionNom as listeRegions, listeRegionIsoRegionNom as regions
 }
+
+//console.table(communesDepartementales(['16','17','18','82']));
+//console.table(communesRegionales(['fr-mtq','fr-gua','fr-guf','fr-may','fr-lre']));
+//console.table(communesRegionales(['fr-naq']));
+//console.table(communesRegionales(['fr-cor']));
+
+//console.log(communesRegionales(['fr-mtq','fr-may']));
+//console.table(communes(['31555','86194','33064']));

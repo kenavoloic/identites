@@ -1,7 +1,22 @@
 import patronymiques  from './donnees/patronymes.js';
 import {masculins, feminins}  from './donnees/prenoms.js';
 import {types as tVoies, odonymiques as nVoies}  from './donnees/voirie.js';
-import {insee_p, departement_p, region_p, nombreVilles, ville,inseeCommune, inseePostal, communeInsee, departementNom, communes, communesRegionales, communesDepartementales} from './outils/territoires.js';
+import {
+    insee_p, 
+    departement_p,
+    region_p,
+    nombreVilles,
+    ville,
+    inseeCommune,
+    inseePostal,
+    communeInsee,
+    departementNom,
+    communes,
+    communesRegionales,
+    communesDepartementales,
+    listeDepartements as _listeDepartements,
+    listeRegions as _listeRegions
+} from './outils/territoires.js';
 import {europe, asie, afrique, amerique, oceanie} from './donnees/pays.js';
 import {validationDate, jCalendaire, dureeJour, dureeSemaine, triObjetsDate, numeroSecuriteSociale, numeroSecuriteSociale99}  from './donnees/dates.js';
 import dictionnaire  from './donnees/liste00.js';
@@ -16,8 +31,11 @@ const codesInsee = [...inseeCommune.keys()];
 const listeVilles = () => codesInsee;
 const getCodeInsee = envoi => codesInsee[envoi % codesInsee.length];
 
+const listeDepartements = () => _listeDepartements;
+const listeRegions = () => _listeRegions;
 
-const communesMinuscules = [...communeInsee.keys()];//.map(x => x.toLowerCase());
+
+const communesMinuscules = [...communeInsee.keys()];
 
 
 // Graine par défaut
@@ -35,14 +53,15 @@ const elements = dictionnaire.length;
 const FauxTexte = function(seed, mpp={minimum:6, maximum:12}, ppp={minimum:3, maximum:6}, np = 9901) {
 
     seed = seed ? seed : graineParDefaut;
-    //const graine = seed ? reducteurGraine(seed) : reducteurGraine("Louison Bobet");//9901;
-    const graine = seed ? reducteurGraine(seed) : reducteurGraine(graineParDefaut);//9901;
+    //const graine = seed ? reducteurGraine(seed) : reducteurGraine("Louison Bobet");
+    const graine = seed ? reducteurGraine(seed) : reducteurGraine(graineParDefaut);
 
     //np = seed ? reducteurGraine(seed) : 23;
     np = graine;
     const nombrePremier = nombresPremiers(np);
 
-    const graineActuelle = () => ({graine: graine, seed: seed});
+    //const graineActuelle = () => ({graine: graine, seed: seed});
+    const graineActuelle = () => seed;
 
     const motsParPhrase = {minimum: 6, maximum: 12};
     const phraseParParagraphe = {minimum: 3, maximum: 6};
@@ -283,7 +302,7 @@ const FauxTexte = function(seed, mpp={minimum:6, maximum:12}, ppp={minimum:3, ma
 	let pf = aleaPonctuationsFortes();
 	let retour = temporaire.join(" ");
 
-	return retour+pf;
+	return `${retour}${pf}`;
     };
 
     // Genèse de chaînes alphanumériques
@@ -292,8 +311,8 @@ const FauxTexte = function(seed, mpp={minimum:6, maximum:12}, ppp={minimum:3, ma
     const iterationAlphanumeriques = aleaListe(alphanumeriques.length, nombrePremier);
     const aleaAlphanumeriques = () => alphanumeriques[iterationAlphanumeriques(generateurAlphanumeriques.next().value)];
 
-    const chaine = (longueur=8) => {
-	longueur = isNaN(longueur) ? 8 : (longueur < 0 || longueur > 36) ? 8 : longueur;
+    const chaineAlphanumerique = (longueur=8) => {
+	longueur = isNaN(longueur) ? 8 : (longueur < 0 || longueur > 1024) ? 8 : longueur;
 	let retour = Array.from({length:longueur}, () => aleaAlphanumeriques()).join("");
 	return retour;
     };
@@ -303,14 +322,12 @@ const FauxTexte = function(seed, mpp={minimum:6, maximum:12}, ppp={minimum:3, ma
     const {x:xHexadecimal, r:rHexadecimal} = dataRX();
     const generateurHexadecimal = Lmap(xHexadecimal, rHexadecimal);
     const iterationHexadecimal = iteration(16, nombrePremier);
-    const alea16 = () => iterationHexadecimal(generateurHexadecimal.next().value);
+    const alea16 = () => base16[iterationHexadecimal(generateurHexadecimal.next().value)];
 
     const nombreHexaAleatoire = (nombreChiffres=8) => {
-	nombreChiffres = isNaN(nombreChiffres) ? 8 : (nombreChiffres < 0 || nombreChiffres > 12) ?  8 : nombreChiffres;
-	let nombre16 = Array.from({length:nombreChiffres}, () => alea16()).join(" ");
-	let nombre = parseInt(nombre16, 16);
-	let valeur = `${nombre}`.slice(0, nombreChiffres);
-	return valeur.padStart(nombreChiffres,0);
+	nombreChiffres = isNaN(nombreChiffres) ? 8 : (nombreChiffres < 0 || nombreChiffres > 1024) ?  8 : nombreChiffres;
+	let nombres = Array.from({length:nombreChiffres}, () => alea16());
+	return nombres.join("").padStart(nombreChiffres, 0);
     };
 
     const nombre = (nombreChiffres=8) => nombreHexaAleatoire(nombreChiffres);
@@ -354,27 +371,29 @@ const FauxTexte = function(seed, mpp={minimum:6, maximum:12}, ppp={minimum:3, ma
 	return Array(formatagePhrase(aleatoires));
     };
 
+
+    const phrases = nombre => {
+	nombre = isNaN(nombre) ? 6 : nombre;
+	let retour = Array.from({length:nombre}, () => phrase());
+	return [...retour];
+    };
+
     const paragraphe = () => {
 	let iterations = aleaParagraphes();
 	let retour = Array.from({length:iterations}, () => phrase());
 	return retour.join(" ");
     };
-
-    const phrases = nombre => {
-	nombre = isNaN(nombre) ? 6 : nombre;
-	let retour = Array.from({length:nombre}, () => phrase());
-	return retour;
-    };
-
+    
     const paragraphes = nombre => {
 	nombre = isNaN(nombre) ? 1 : nombre;
-	return Array.from({length:nombre}, () => paragraphe());
+	return [...Array.from({length:nombre}, () => paragraphe())];
     };
 
-    const liste = nombre => {
+    const phraseMots = nombre => {
 	nombre = isNaN(nombre) ? 2 : nombre;
-	let retour = Array.from({length:nombre}, () => motAleatoire());
-	return formatagePhrase(retour);        
+	let temporaire = Array.from({length:nombre}, () => motAleatoire());
+	let retour = formatagePhrase(temporaire);
+	return `${retour.slice(0,1).toUpperCase()}${retour.slice(1)}`;
     };
 
     const nombreLettres = (nombre) => {
@@ -384,30 +403,40 @@ const FauxTexte = function(seed, mpp={minimum:6, maximum:12}, ppp={minimum:3, ma
 
 
     return {
-	graineActuelle,
-	liste,
+	mot, mots, phrase, phrases,
+	phraseMots, chaineAlphanumerique,
 	paragraphe, paragraphes,
-	phrase, phrases, 
-	mot, mots,
-	majusculePremiereLettre,
-	nombre, nombres, nombresUniques,
-	nombreHexaAleatoire, chaine,
-	generateurListe, generateurValeur, generateurDatePlancherPlafond, generateurDateDepuis,
-	nombreLettres,
-	prenom, prenomMasculin, prenomFeminin, patronyme,
-	prenomsMasculins, prenomsFeminins, patronymes,
-	adresse, nomVoie, nomsVoies,
-	nomVoieAleatoire,
-	typeVoie, typesVoies,
+	
+	zeroUn,	nombreHexaAleatoire, nombreLettres,
 	aleaCentaine, aleaMillier,
-	zeroUn,
-	nomVille, nomsVilles, nomVilleAleatoire,
-	inseeVille,
-	ville, departementNom, communesDepartementales, communesRegionales, communes, rechercheCommune,
-	listeVilles,
-	jourCalendaire,
+
+	prenomsFeminins, prenomFeminin,
+	prenomsMasculins, prenomMasculin,
+	prenom,
+	patronymes, patronyme,
+
+	typeVoie, typesVoies,
+	nomVoie, nomsVoies,
+	adresse,
+
+	nomVille, nomsVilles, inseeVille, listeVilles,
+	communes, //commune_p devra remplacer communes lors de la prochaine maj
+	
+	listeDepartements, departementNom, communesDepartementales,
+
+	listeRegions, communesRegionales,
+
+	generateurDatePlancherPlafond, generateurDateDepuis, jourCalendaire,
+	
+	generateurListe, generateurValeur,
 	melangeur,
-	securiteSociale, securiteSociale99
+	graineActuelle,
+
+	//nombre, nombres, nombresUniques, 
+	//nomVoieAleatoire,
+	ville, 	 rechercheCommune,
+	majusculePremiereLettre,
+	securiteSociale, //securiteSociale99
     };
 };
 

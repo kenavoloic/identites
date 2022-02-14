@@ -1,0 +1,22 @@
+export default [
+    {nom:"Maurice Garin", booleen:true},
+    {nom:"Henri Cornet", booleen:true},
+    {nom:"Louis Trousselier", booleen:true},
+    {nom:"René Pottier", booleen:true},
+    {nom:"Lucien Petit-Breton", booleen:true},
+    {nom:"Octave Lapize", booleen:true},
+    {nom:"Gustave Garrigou", booleen:true},
+    {nom:"André Leducq", booleen:true},
+    {nom:"Antonin Magne", booleen:true},
+    {nom:"Georges Speicher", booleen:true},
+    {nom:"Roger Lapébie", booleen:true},
+    {nom:"Jean Robic", booleen:true},
+    {nom:"Louison Bobet", booleen:true},
+    {nom:"Roger Walkowiak", booleen:true},
+    {nom:"Jacques Anquetil", booleen:true},
+    {nom:"Lucien Aimar", booleen:true},
+    {nom:"Roger Pingeon", booleen:true},
+    {nom:"Bernard Thévenet", booleen:true},
+    {nom:"Bernard Hinault", booleen:true},
+    {nom:"Laurent Fignon", booleen:true}
+];
