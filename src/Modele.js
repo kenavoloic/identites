@@ -1,4 +1,3 @@
-//import FauxTexte from './fauxTexte/index.js';
 import FauxTexte from 'FauxTexte';
 
 import  {quantiteRequise, xchar} from './outils/index.js';
