@@ -1,6 +1,7 @@
 node_modules/
 ztank/
 public/listes/*.*
+src/fauxTexte/
 *.0
 *.1
 *.2
