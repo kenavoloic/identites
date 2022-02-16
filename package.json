@@ -4,11 +4,13 @@
     "description": "Génération de listes d'individus à l'instar de randomUser. Pour chaque individu, sont indiqués nom, prénom, genre, numéro de sécurité sociale, adresse actuelle et lieu de naissance.",
     "main": "index.js",
     "type": "module",
+    "private": true,
     "scripts": {
 	"test": "echo \"Error: no test specified\" && exit 1",
 	"start": "node src/index.js"
     },
     "dependencies": {
+	"FauxTexte": "https://github.com/kenavoloic/FauxTexte.git",
 	"ejs": "^3.1.6",
 	"express": "^4.17.2",
 	"express-favicon": "^2.0.1",

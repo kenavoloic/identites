@@ -1,4 +1,6 @@
-import FauxTexte from './fauxTexte/index.js';
+//import FauxTexte from './fauxTexte/index.js';
+import FauxTexte from 'FauxTexte';
+
 import  {quantiteRequise, xchar} from './outils/index.js';
 
 import {triDates, triPatronyme, triCodePostal, capitale, capitalisationPrenom, dureeJour} from './outils/index.js';
